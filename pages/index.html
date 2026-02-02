@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Maxpesa - Movimentando Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+ 
+        /* Header & Navigation */
+        header {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+ 
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+        }
+ 
+        .top-bar {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            color: #ffffff;
+            padding: 12px 0;
+            font-size: 0.9rem;
+        }
+ 
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+ 
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+ 
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+ 
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+ 
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+        }
+ 
+        .social-links a:hover {
+            background: #ffffff;
+            color: #C41E3A;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+ 
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .logo-img {
+            width: 220px;
+            height: auto;
+            max-height: 85px;
+            object-fit: contain;
+        }
+ 
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+ 
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+ 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #C41E3A, #E63946);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+ 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+ 
+        .nav-links a:hover {
+            color: #c91212;
+        }
+ 
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+ 
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #C41E3A;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+ 
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.95) 0%, rgba(139, 20, 40, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect fill="%23C41E3A" width="1920" height="1080"/><rect fill="url(%23grid)" width="1920" height="1080"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-align: center;
+            padding-top: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+ 
+        .hero-content {
+            max-width: 900px;
+            padding: 40px;
+            animation: fadeInUp 1s ease;
+            z-index: 1;
+            position: relative;
+        }
+ 
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s ease infinite;
+        }
+ 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+ 
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            font-weight: 900;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+ 
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+ 
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+ 
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            background: #ffffff;
+            color: #c41e1e;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+ 
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            background: #f8f8f8;
+        }
+ 
+        .cta-button-outline {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+ 
+        .cta-button-outline:hover {
+            background: #ffffff;
+            color: #d12323;
+        }
+ 
+        /* Floating Elements */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.08;
+            animation: float 2s ease-in-out infinite;
+        }
+ 
+        .shape-1 {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: #ffffff;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-delay: 0s;
+        }
+ 
+        .shape-2 {
+            top: 60%;
+            right: 15%;
+            width: 150px;
+            height: 150px;
+            background: #ffffff;
+            border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+            animation-delay: 2s;
+        }
+ 
+        .shape-3 {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation-delay: 4s;
+        }
+ 
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(10deg); }
+            66% { transform: translateY(20px) rotate(-10deg); }
+        }
+ 
+        /* Sections */
+        section {
+            padding: 120px 40px;
+        }
+ 
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+ 
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease;
+        }
+ 
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFE5E9 0%, #FFD1D6 100%);
+            color: #C41E3A;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+ 
+        .section-title {
+            font-size: 3.5rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+        }
+ 
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+ 
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+ 
+        .about-text {
+            animation: fadeInLeft 1s ease;
+        }
+ 
+        .about-text h3 {
+            color: #C41E3A;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+ 
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.9;
+            color: #444;
+            font-size: 1.05rem;
+        }
+ 
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+ 
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+ 
+        .feature-item:hover {
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.1);
+            transform: translateY(-3px);
+        }
+ 
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+ 
+        .feature-text {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+ 
+        .about-image {
+            position: relative;
+            animation: fadeInRight 1s ease;
+        }
+ 
+        .about-image-main {
+            width: 90%;
+            height: 599px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 800;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .about-image-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect fill="url(%23dots)" width="600" height="600"/></svg>');
+            opacity: 0.3;
+        }
+ 
+        .about-badge-floating {
+            position: absolute;
+            background: #ffffff;
+            padding: 25px 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            font-weight: 800;
+            animation: floatBadge 3s ease-in-out infinite;
+        }
+ 
+        .badge-years {
+            bottom: -30px;
+            right: 50px;
+            color: #C41E3A;
+            font-size: 3rem;
+        }
+ 
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+ 
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+ 
+        .stat-card {
+            text-align: center;
+            padding: 50px 30px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+ 
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.15);
+            border-color: #C41E3A;
+        }
+ 
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #C41E3A 0%, #E63946 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+ 
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 600;
+        }
+ 
+        /* Services Section */
+        #servicos {
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+ 
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+        }
+ 
+        .service-card {
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+ 
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #C41E3A 0%, #E63946 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+ 
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+ 
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(196, 30, 58, 0.15);
+            border-color: #FFE5E9;
+        }
+ 
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFE5E9 0%, #FFD1D6 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+ 
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            transform: scale(1.1) rotate(1deg);
+        }
+ 
+        .service-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 18px;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+ 
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+ 
+        .service-link {
+            color: #C41E3A;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+ 
+        .service-link:hover {
+            gap: 15px;
+        }
+ 
+        /* Certifications */
+        #certificacoes {
+            background: #ffffff;
+        }
+ 
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
+        }
+ 
+        .cert-item {
+            text-align: center;
+            padding: 40px 25px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+            border: 2px solid #f8f9fa;
+        }
+ 
+        .cert-item:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(196, 30, 58, 0.12);
+            border-color: #FFE5E9;
+        }
+ 
+        .cert-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #FFE5E9 0%, #FFD1D6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+ 
+        .cert-item:hover .cert-icon {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            transform: scale(1.1) rotate(3deg);
+        }
+ 
+        .cert-item h4 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+ 
+        .cert-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+ 
+        /* Clients Section - CARROSSEL */
+        #clientes {
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+ 
+        .carousel-container {
+            position: relative;
+            max-width: 1400px;
+            margin: 60px auto 0;
+            padding: 0 80px;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: calc(25% - 22.5px);
+            flex-shrink: 0;
+        }
+ 
+        .client-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            background: #ffffff;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 140px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            font-weight: 700;
+            color: #666;
+            font-size: 1.1rem;
+            border: 2px solid rgba(190, 190, 190, 0.205);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .client-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(196, 30, 58, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .client-logo:hover::before {
+            left: 100%;
+        }
+ 
+        .client-logo:hover {
+            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.2);
+            transform: translateY(-10px) scale(1.05);
+            border-color: #C41E3A;
+        }
+
+        .client-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: all 0.4s ease;
+            filter: grayscale(30%);
+        }
+
+        .client-logo:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 30%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            border: none;
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 12px 35px rgba(196, 30, 58, 0.5);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .indicator.active {
+            background: linear-gradient(135deg, #C41E3A 0%, #E63946 100%);
+            width: 40px;
+            border-radius: 6px;
+        }
+
+        .carousel-autoplay {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .autoplay-toggle {
+            width: 50px;
+            height: 26px;
+            background: #ddd;
+            border-radius: 13px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .autoplay-toggle.active {
+            background: linear-gradient(135deg, #C41E3A 0%, #E63946 100%);
+        }
+
+        .autoplay-toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .autoplay-toggle.active::after {
+            transform: translateX(24px);
+        }
+ 
+        /* Contact Section */
+        #contato {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+        }
+ 
+        #contato .section-badge {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+ 
+        #contato .section-title {
+            color: #ffffff;
+        }
+ 
+        #contato .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+ 
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+ 
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+ 
+        .contact-form h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+ 
+        .form-group {
+            margin-bottom: 25px;
+        }
+ 
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+ 
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            font-size: 1rem;
+        }
+ 
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+ 
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #C41E3A;
+            background: rgba(255, 255, 255, 0.12);
+        }
+ 
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
+        }
+ 
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(196, 30, 58, 0.5);
+        }
+ 
+        .contact-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+ 
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+ 
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #C41E3A;
+            transform: translateX(10px);
+        }
+ 
+        .info-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+ 
+        .info-content h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+ 
+        .info-content p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+ 
+        /* Blog Section */
+        #blog {
+            background: #ffffff;
+        }
+ 
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+ 
+        .blog-card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(196, 30, 58, 0.45);
+        }
+ 
+        .blog-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(196, 30, 58, 0.15);
+            border-color: rgba(196, 30, 58, 0.7);
+        }
+ 
+        .blog-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+ 
+        .blog-content {
+            padding: 40px;
+        }
+ 
+        .blog-date {
+            color: #C41E3A;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+ 
+        .blog-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.4;
+        }
+ 
+        .blog-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+ 
+        .read-more {
+            color: #C41E3A;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+ 
+        .read-more:hover {
+            gap: 15px;
+        }
+ 
+        /* Footer - REDESENHADO */
+        footer {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: #ffffff;
+            padding: 80px 0 0;
+        }
+ 
+        .footer-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 60px;
+        }
+ 
+        .footer-about {
+            padding-right: 40px;
+        }
+
+        .footer-logo {
+            width: 180px;
+            margin-bottom: 25px;
+            margin-left: 80px;
+        }
+ 
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.9;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+        }
+
+        .footer-social a:hover {
+            background: #C41E3A;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(196, 30, 58, 0.4);
+        }
+ 
+        .footer-section h3 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #C41E3A, #E63946);
+            border-radius: 2px;
+        }
+ 
+        .footer-section ul {
+            list-style: none;
+        }
+ 
+        .footer-section ul li {
+            margin-bottom: 15px;
+        }
+ 
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+ 
+        .footer-section a:hover {
+            color: #C41E3A;
+            padding-left: 8px;
+        }
+
+        .footer-section a::before {
+            content: '→';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover::before {
+            opacity: 1;
+        }
+
+        .footer-contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .footer-contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(196, 30, 58, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #C41E3A;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-text {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact-text a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-text a:hover {
+            color: #C41E3A;
+        }
+ 
+        .footer-bottom {
+            background: #000000;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #C41E3A;
+        }
+ 
+        /* WhatsApp Float Button - CORRIGIDO */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            text-decoration: none;
+            animation: pulseWpp 2s ease infinite;
+        }
+
+        @keyframes pulseWpp {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6);
+            }
+        }
+ 
+        .whatsapp-float:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
+        }
+ 
+        .whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        /* Tooltip do WhatsApp */
+        .whatsapp-float::before {
+            content: 'Fale conosco!';
+            position: absolute;
+            right: 80px;
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-float:hover::before {
+            opacity: 1;
+            right: 85px;
+        }
+ 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ 
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+ 
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+ 
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+ 
+            .section-title {
+                font-size: 2.5rem;
+            }
+ 
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+ 
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .carousel-slide {
+                min-width: calc(33.333% - 20px);
+            }
+        }
+ 
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+ 
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+ 
+            nav {
+                padding: 15px 20px;
+            }
+ 
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 160px;
+                flex-direction: column;
+                background: #ffffff;
+                width: 100%;
+                text-align: center;
+                transition: 0.4s;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+                padding: 30px 0;
+                gap: 20px;
+            }
+ 
+            .nav-links.active {
+                right: 0;
+            }
+ 
+            .menu-toggle {
+                display: flex;
+            }
+ 
+            .hero {
+                padding-top: 180px;
+                min-height: 90vh;
+            }
+ 
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+ 
+            .hero p {
+                font-size: 1.1rem;
+            }
+ 
+            .cta-buttons {
+                flex-direction: column;
+            }
+ 
+            section {
+                padding: 80px 20px;
+            }
+ 
+            .section-title {
+                font-size: 2rem;
+            }
+ 
+            .services-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+ 
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+ 
+            .contact-form,
+            .info-card {
+                padding: 30px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 20px 40px;
+            }
+
+            .footer-about {
+                padding-right: 0;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                padding: 25px 20px;
+            }
+
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+ 
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .whatsapp-float::before {
+                display: none;
+            }
+
+            .carousel-container {
+                padding: 0 60px;
+            }
+
+            .carousel-slide {
+                min-width: calc(50% - 15px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-slide {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span>📞 0800 629 7372 / (21) 3675-1900</span>
+                <span>✉️ contato@maxpesa.com.br</span>
+            </div>
+            <div class="social-links">
+                <a href="linkedin.com/company/grupomaxpesa/?originalSubdomain=br" title="LinkedIn">in</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="https://wa.me/5521972101901" title="WhatsApp" target="_blank">💬</a>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="index.html" class="logo"><img src="img/maxpesa-logo.png" alt="Logo MAXPESA" class="logo-img"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">A Empresa</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#certificacoes">Certificações</a></li>
+                <li><a href="#clientes">Clientes</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+ 
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+       
+        <div class="hero-content">
+            <div class="hero-badge">✨ Há mais de 25 anos no mercado</div>
+            <h1>Movimentando Soluções</h1>
+            <p>Excelência em movimentação de cargas, transporte e equipamentos industriais. Tecnologia de ponta, equipe especializada e comprometimento com resultados.</p>
+            <div class="cta-buttons">
+                <a href="#servicos" class="cta-button">
+                    Nossos Serviços →
+                </a>
+                <a href="#contato" class="cta-button cta-button-outline">
+                    Solicite um Orçamento
+                </a>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- About Section -->
+    <section id="sobre">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Sobre Nós</div>
+                <h2 class="section-title">A Empresa</h2>
+                <p class="section-subtitle">Construindo um legado de confiabilidade, responsabilidade e segurança há mais de duas décadas</p>
+            </div>
+           
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>25 Anos de Tradição e Inovação</h3>
+                    <p>O Grupo Maxpesa nasceu com o propósito de gerar soluções para nossos clientes, trazendo resultados excepcionais nas atividades que nos dispomos a realizar.</p>
+                    <p>Ao longo de nossa jornada de mais de 25 anos, construímos um legado sólido de confiabilidade, responsabilidade e segurança, utilizando equipamentos de última geração e profissionais altamente qualificados.</p>
+                    <p>Garantimos aos nossos clientes serviços de excelência em movimentação de cargas, transporte, remoções industriais e comerciais, locação e venda de equipamentos.</p>
+                   
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">Equipamentos Modernos</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">Equipe Qualificada</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">Segurança Garantida</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">Resultados Comprovados</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-image-main">
+                        <img src="img/maxpesaposter.jpg" alt="">
+                    </div>
+                    <div class="about-badge-floating badge-years">25+</div>
+                </div>
+            </div>
+           
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Anos de Experiência</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Clientes Satisfeitos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Comprometimento</div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Services Section -->
+    <section id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">O Que Fazemos</div>
+                <h2 class="section-title">Nossos Serviços</h2>
+                <p class="section-subtitle">Soluções completas e personalizadas para todas as suas necessidades de movimentação e transporte industrial</p>
+            </div>
+           
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Movimentação Horizontal e Vertical de Cargas</h3>
+                    <p>Soluções completas e seguras para movimentação de cargas pesadas com equipamentos de última geração e equipe especializada.</p>
+                    <a href="#" class="service-link">Saiba mais →</a>
+                </div>
+               
+                <div class="service-card">
+                    <div class="service-icon">🚛</div>
+                    <h3>Movimentação de Materiais</h3>
+                    <p>Linha amarela completa e caminhões especializados para transporte eficiente de materiais industriais.</p>
+                    <a href="#" class="service-link">Saiba mais →</a>
+                </div>
+               
+                <div class="service-card">
+                    <div class="service-icon">🏭</div>
+                    <h3>Remoção Industrial</h3>
+                    <p>Especialistas em desmontagem, transporte e montagem de equipamentos industriais com total segurança.</p>
+                    <a href="#" class="service-link">Saiba mais →</a>
+                </div>
+               
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Locação de Equipamentos</h3>
+                    <p>Equipamentos modernos disponíveis para locação com operadores altamente qualificados.</p>
+                    <a href="#" class="service-link">Saiba mais →</a>
+                </div>
+               
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <h3>Venda de Equipamentos</h3>
+                    <p>Venda de equipamentos industriais novos e seminovos com garantia e suporte técnico completo.</p>
+                    <a href="#" class="service-link">Saiba mais →</a>
+                </div>
+               
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Orçamento Personalizado</h3>
+                    <p>Solicite um orçamento totalmente customizado para atender suas necessidades específicas.</p>
+                    <a href="#contato" class="service-link">Solicitar agora →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Certifications Section -->
+    <section id="certificacoes">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Qualidade Garantida</div>
+                <h2 class="section-title">Certificações</h2>
+                <p class="section-subtitle">Como parte de nossos principais pilares, o Grupo Maxpesa preza por suas certificações, demonstrando profissionalismo, comprometimento e qualificação</p>
+            </div>
+           
+            <div class="certifications-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">🏆</div>
+                    <h4>ISO 9001</h4>
+                    <p>Gestão da Qualidade</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🌱</div>
+                    <h4>ISO 14001</h4>
+                    <p>Gestão Ambiental</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🛡️</div>
+                    <h4>ISO 45001</h4>
+                    <p>Saúde e Segurança</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">♀️</div>
+                    <h4>ONU Mulheres</h4>
+                    <p>Empoderamento Feminino</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🌍</div>
+                    <h4>Pacto Global</h4>
+                    <p>Sustentabilidade</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🤝</div>
+                    <h4>Instituto Ethos</h4>
+                    <p>Responsabilidade Social</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Clients Section -->
+    <section id="clientes">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Parceiros de Sucesso</div>
+                <h2 class="section-title">Alguns Clientes</h2>
+                <p class="section-subtitle">Orgulhosamente atendendo as maiores empresas do Brasil com excelência e dedicação</p>
+            </div>
+           
+            <div class="carousel-container">
+                <button class="carousel-btn prev" id="prevBtn">‹</button>
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/vale-logo.png" alt="Vale"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/petrobras-logo.gif" alt="Petrobras"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/light-logo.png" alt="Light"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/enel-logo.png" alt="Enel"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/roche-logo.png" alt="Roche"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/bayer-logo.png" alt="Bayer"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/hyundai-logo.png" alt="Hyundai"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/GE-logo.png" alt="GE"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/furnas-logo.png" alt="Furnas"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/cemig-logo.png" alt="Cemig"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/air-liquide-logo.png" alt="Air Liquide"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/engie-logo.png" alt="Engie"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="client-logo"><img src="img/nts-logo.png" alt="NTS"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" id="nextBtn">›</button>
+
+                <div class="carousel-indicators" id="carouselIndicators"></div>
+                
+                <div class="carousel-autoplay">
+                    <span>Autoplay</span>
+                    <div class="autoplay-toggle active" id="autoplayToggle"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Insights & Novidades</div>
+                <h2 class="section-title">Blog</h2>
+                <p class="section-subtitle">Fique por dentro das últimas tendências e novidades do setor industrial</p>
+            </div>
+           
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image"><img src="img/Contêiner amarelo com logo MAXPESA.png" alt="Container Maxpesa"></div>
+                    <div class="blog-content">
+                        <div class="blog-date">15 de Janeiro, 2026</div>
+                        <h3>Tudo sobre transporte de container</h3>
+                        <p>Descubra as melhores práticas e técnicas para transporte seguro e eficiente de containers industriais...</p>
+                        <a href="#" class="read-more">Leia Mais →</a>
+                    </div>
+                </div>
+               
+                <div class="blog-card">
+                    <div class="blog-image"><img src="img/grupomaxpesa.png" alt="Grupo Maxpesa"></div>
+                    <div class="blog-content">
+                        <div class="blog-date">10 de Janeiro, 2026</div>
+                        <h3>Manutenção de subestações elétricas</h3>
+                        <p>Guia completo sobre manutenção preventiva e corretiva de subestações elétricas industriais...</p>
+                        <a href="#" class="read-more">Leia Mais →</a>
+                    </div>
+                </div>
+               
+                <div class="blog-card">
+                    <div class="blog-image"><img src="img/testeopaciade.jpg" alt="Teste de Opacidade"></div>
+                    <div class="blog-content">
+                        <div class="blog-date">05 de Janeiro, 2026</div>
+                        <h3>Teste de Opacidade: O que é e por que fazer</h3>
+                        <p>Entenda a importância dos testes de opacidade para a conformidade ambiental da sua frota...</p>
+                        <a href="#" class="read-more">Leia Mais →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Contact Section -->
+    <section id="contato">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Fale Conosco</div>
+                <h2 class="section-title">Entre em Contato</h2>
+                <p class="section-subtitle">Estamos prontos para atender você. Solicite um orçamento ou tire suas dúvidas</p>
+            </div>
+           
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Solicite um Orçamento</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Conte-nos sobre seu projeto..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Enviar Mensagem</button>
+                    </form>
+                </div>
+               
+                <div class="contact-info-section">
+                    <div class="info-card">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Telefone</h3>
+                            <p>0800 629 7372<br>(21) 3675-1900</p>
+                        </div>
+                    </div>
+                   
+                    <div class="info-card">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-content">
+                            <h3>E-mail</h3>
+                            <p>contato@maxpesa.com.br</p>
+                        </div>
+                    </div>
+                   
+                    <div class="info-card">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Endereço</h3>
+                            <p>Av. Primavera, 156<br>Jardim Primavera<br>Duque de Caxias - RJ<br>CEP: 25215-255</p>
+                        </div>
+                    </div>
+                   
+                    <div class="info-card">
+                        <div class="info-icon">🏢</div>
+                        <div class="info-content">
+                            <h3>Filiais</h3>
+                            <p>Minas Gerais<br>São Paulo<br>Espírito Santo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-about">
+                <img src="img/logorendondamaxpesa.png" alt="Maxpesa Logo" class="footer-logo">
+                <p>Há mais de 25 anos movimentando soluções com excelência, segurança e comprometimento total com nossos clientes. Somos referência em movimentação de cargas e equipamentos industriais.</p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/company/grupomaxpesa/posts/?feedView=all" title="LinkedIn" aria-label="LinkedIn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/grupomaxpesa/" title="Instagram" aria-label="Instagram">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://wa.me/5521972101901" title="WhatsApp" aria-label="WhatsApp" target="_blank">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#sobre">A Empresa</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#certificacoes">Certificações</a></li>
+                    <li><a href="#clientes">Clientes</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Serviços</h3>
+                <ul>
+                    <li><a href="#servicos">Movimentação de Cargas</a></li>
+                    <li><a href="#servicos">Remoção Industrial</a></li>
+                    <li><a href="#servicos">Locação de Equipamentos</a></li>
+                    <li><a href="#servicos">Venda de Equipamentos</a></li>
+                    <li><a href="#servicos">Transporte Especializado</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <div class="footer-contact-info">
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">📞</div>
+                        <div class="footer-contact-text">
+                            <a href="tel:08006297372">0800 629 7372</a><br>
+                            <a href="tel:2136751900">(21) 3675-1900</a>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">✉️</div>
+                        <div class="footer-contact-text">
+                            <a href="mailto:contato@maxpesa.com.br">contato@maxpesa.com.br</a>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">📍</div>
+                        <div class="footer-contact-text">
+                            Av. Primavera, 156<br>
+                            Duque de Caxias - RJ
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Grupo Maxpesa - Todos os direitos reservados</p>
+            <div class="footer-bottom-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="tel:08007410015">Canal de Denúncia: 0800 741 0015</a>
+            </div>
+        </div>
+    </footer>
+ 
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5521972101901" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-4.713 1.262 1.262-4.669-0.292-0.508c-1.207-2.100-1.847-4.507-1.847-6.957 0-7.51 6.11-13.62 13.62-13.62s13.62 6.11 13.62 13.62c0 7.51-6.11 13.62-13.62 13.62zM21.305 19.26c-0.346-0.174-2.049-1.007-2.366-1.123-0.318-0.117-0.549-0.174-0.78 0.174s-0.896 1.123-1.099 1.354c-0.202 0.232-0.405 0.261-0.751 0.087s-1.466-0.54-2.791-1.721c-1.032-0.92-1.728-2.054-1.931-2.401-0.202-0.346-0.021-0.533 0.152-0.706 0.156-0.155 0.346-0.405 0.52-0.607s0.231-0.346 0.347-0.578c0.116-0.232 0.058-0.434-0.029-0.608s-0.78-1.88-1.069-2.574c-0.281-0.676-0.567-0.584-0.78-0.595-0.202-0.010-0.433-0.012-0.665-0.012s-0.607 0.086-0.925 0.433c-0.318 0.346-1.213 1.186-1.213 2.892s1.241 3.355 1.414 3.587c0.174 0.232 2.445 3.733 5.922 5.235 0.827 0.357 1.473 0.571 1.977 0.731 0.831 0.264 1.586 0.227 2.183 0.138 0.666-0.099 2.049-0.837 2.338-1.646 0.289-0.808 0.289-1.501 0.202-1.646s-0.318-0.232-0.665-0.405z"/>
+        </svg>
+    </a>
+ 
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+ 
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+ 
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+ 
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 160;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+ 
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+ 
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+ 
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const button = e.target.querySelector('.submit-button');
+            const originalText = button.textContent;
+            button.textContent = 'Enviando...';
+            button.disabled = true;
+ 
+            setTimeout(() => {
+                alert('✅ Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                e.target.reset();
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 1500);
+        });
+ 
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+ 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+ 
+        document.querySelectorAll('.service-card, .blog-card, .stat-card, .cert-item, .client-logo').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+ 
+        // Counter animation
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    const suffix = element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '';
+                    element.textContent = target + suffix;
+                    clearInterval(timer);
+                } else {
+                    const suffix = element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '';
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 30);
+        };
+ 
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberText = entry.target.textContent;
+                    const number = parseInt(numberText);
+                    animateCounter(entry.target, number);
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+ 
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            statObserver.observe(stat);
+        });
+
+        // Carousel
+        class CarouselClientes {
+            constructor() {
+                this.track = document.getElementById('carouselTrack');
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.indicatorsContainer = document.getElementById('carouselIndicators');
+                this.autoplayToggle = document.getElementById('autoplayToggle');
+                
+                this.currentIndex = 0;
+                this.autoplayInterval = null;
+                this.autoplayEnabled = true;
+                this.slidesToShow = this.getSlidesToShow();
+                
+                this.init();
+            }
+
+            getSlidesToShow() {
+                const width = window.innerWidth;
+                if (width <= 480) return 1;
+                if (width <= 768) return 2;
+                if (width <= 1024) return 3;
+                return 4;
+            }
+
+            init() {
+                this.createIndicators();
+                this.attachEventListeners();
+                this.updateCarousel();
+                this.startAutoplay();
+                
+                window.addEventListener('resize', () => {
+                    const newSlidesToShow = this.getSlidesToShow();
+                    if (newSlidesToShow !== this.slidesToShow) {
+                        this.slidesToShow = newSlidesToShow;
+                        this.currentIndex = 0;
+                        this.createIndicators();
+                        this.updateCarousel();
+                    }
+                });
+            }
+
+            createIndicators() {
+                this.indicatorsContainer.innerHTML = '';
+                const totalPages = Math.ceil(this.slides.length - this.slidesToShow + 1);
+                
+                for (let i = 0; i < totalPages; i++) {
+                    const indicator = document.createElement('div');
+                    indicator.classList.add('indicator');
+                    if (i === 0) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => this.goToSlide(i));
+                    this.indicatorsContainer.appendChild(indicator);
+                }
+            }
+
+            attachEventListeners() {
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+                
+                this.autoplayToggle.addEventListener('click', () => {
+                    this.autoplayEnabled = !this.autoplayEnabled;
+                    this.autoplayToggle.classList.toggle('active');
+                    
+                    if (this.autoplayEnabled) {
+                        this.startAutoplay();
+                    } else {
+                        this.stopAutoplay();
+                    }
+                });
+
+                this.track.addEventListener('mouseenter', () => this.stopAutoplay());
+                this.track.addEventListener('mouseleave', () => {
+                    if (this.autoplayEnabled) this.startAutoplay();
+                });
+            }
+
+            updateCarousel() {
+                const slideWidth = this.slides[0].offsetWidth;
+                const gap = 30;
+                const offset = -(this.currentIndex * (slideWidth + gap));
+                
+                this.track.style.transform = `translateX(${offset}px)`;
+                
+                const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+
+            next() {
+                const maxIndex = this.slides.length - this.slidesToShow;
+                if (this.currentIndex < maxIndex) {
+                    this.currentIndex++;
+                } else {
+                    this.currentIndex = 0;
+                }
+                this.updateCarousel();
+            }
+
+            prev() {
+                const maxIndex = this.slides.length - this.slidesToShow;
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                } else {
+                    this.currentIndex = maxIndex;
+                }
+                this.updateCarousel();
+            }
+
+            goToSlide(index) {
+                this.currentIndex = index;
+                this.updateCarousel();
+            }
+
+            startAutoplay() {
+                this.stopAutoplay();
+                if (!this.autoplayEnabled) return;
+                
+                this.autoplayInterval = setInterval(() => {
+                    this.next();
+                }, 4000);
+            }
+
+            stopAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
+            }
+        }
+
+        const carouselObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !window.carouselInitialized) {
+                    new CarouselClientes();
+                    window.carouselInitialized = true;
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const clientesSection = document.getElementById('clientes');
+        if (clientesSection) {
+            carouselObserver.observe(clientesSection);
+        }
+    </script>
+</body>
+</html>
