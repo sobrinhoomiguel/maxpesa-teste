@@ -598,6 +598,16 @@
             font-size: 1.05rem;
             margin-bottom: 25px;
         }
+
+       
+        .hide { opacity: 0; pointer-events: none; }
+
+        /* Responsividade: No celular fica um abaixo do outro */
+        @media (max-width: 768px) {
+            .modal-container { grid-template-columns: 1fr; }
+            .modal-image { height: 300px; }
+            #modal { width: 100vw; height: 100vh; border-radius: 0; }
+        }
  
                     /* Fundo escurecido */
             #fade {
@@ -710,12 +720,13 @@
  
         .cert-item:hover .cert-icon {
             background: linear-gradient(135deg, #C41E3A 0%, #8B1428 100%);
-            transform: scale(1.1) rotate(3deg);
+            transform: scale(1.1);
         }
  
         .cert-item h4 {
             color: #1a1a1a;
             margin-bottom: 10px;
+            padding-top: 20px;
             font-weight: 800;
             font-size: 1.2rem;
         }
@@ -1617,7 +1628,7 @@
         <div class="floating-shape shape-3"></div>
        
         <div class="hero-content">
-            <div class="hero-badge">✨ Há mais de 25 anos no mercado</div>
+            <div class="hero-badge">Há mais de 25 anos no mercado!</div>
             <h1>Movimentando Soluções</h1>
             <p>Excelência em movimentação de cargas, transporte e equipamentos industriais. Tecnologia de ponta, equipe especializada e comprometimento com resultados.</p>
             <div class="cta-buttons">
@@ -1724,35 +1735,36 @@
                 </div>
                
                 <div class="service-card">
-                    <div class="service-icon">🚛</div>
+                    <div class="service-icon"><i class="fa-solid fa-truck"></i></div>
                     <h3>Movimentação de Materiais</h3>
                     <p>Linha amarela completa e caminhões especializados para transporte eficiente de materiais industriais.</p>
                     <a href="#" class="service-link">Saiba mais →</a>
+                    <div id="fade" class="hide"></div>
                 </div>
                
                 <div class="service-card">
-                    <div class="service-icon">🏭</div>
+                    <div class="service-icon"><i class="fa-solid fa-industry"></i></div>
                     <h3>Remoção Industrial</h3>
                     <p>Especialistas em desmontagem, transporte e montagem de equipamentos industriais com total segurança.</p>
                     <a href="#" class="service-link">Saiba mais →</a>
                 </div>
                
                 <div class="service-card">
-                    <div class="service-icon">⚙️</div>
+                    <div class="service-icon"><i class="fa-solid fa-gear"></i></div>
                     <h3>Locação de Equipamentos</h3>
                     <p>Equipamentos modernos disponíveis para locação com operadores altamente qualificados.</p>
                     <a href="#" class="service-link">Saiba mais →</a>
                 </div>
                
                 <div class="service-card">
-                    <div class="service-icon">🛒</div>
+                    <div class="service-icon"><i class="fa-solid fa-cart-arrow-down"></i></div>
                     <h3>Venda de Equipamentos</h3>
                     <p>Venda de equipamentos industriais novos e seminovos com garantia e suporte técnico completo.</p>
                     <a href="#" class="service-link">Saiba mais →</a>
                 </div>
                
                 <div class="service-card">
-                    <div class="service-icon">📋</div>
+                    <div class="service-icon"><i class="fa-solid fa-paste"></i></div>
                     <h3>Orçamento Personalizado</h3>
                     <p>Solicite um orçamento totalmente customizado para atender suas necessidades específicas.</p>
                     <a href="#contato" class="service-link">Solicitar agora →</a>
@@ -1777,27 +1789,27 @@
                     <p>Gestão da Qualidade</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">🌱</div>
+                    <div class="cert-icon"><img src="img/#" alt="ISO 14001 logo" style="width: 140px; object-fit: cover; border: 2px solid rgba(109, 109, 109, 0.452); border-radius: 50%"></div>
                     <h4>ISO 14001</h4>
                     <p>Gestão Ambiental</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">🛡️</div>
+                    <div class="cert-icon"><img src="img/#" alt="ISO 45001 logo" style="width: 140px; object-fit: cover; border: 2px solid rgba(109, 109, 109, 0.452); border-radius: 50%"></div>
                     <h4>ISO 45001</h4>
                     <p>Saúde e Segurança</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">♀️</div>
+                    <div class="cert-icon"><img src="img/onu-mulheres.png" alt="ONU Mulheres logo" style="width: 140px; object-fit: cover; border: 2px solid rgba(109, 109, 109, 0.452); border-radius: 50%"></div>
                     <h4>ONU Mulheres</h4>
                     <p>Empoderamento Feminino</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">🌍</div>
+                    <div class="cert-icon"><img src="img/un-global-compact.jpg" alt="Un Global Compact logo" style="width: 140px; height: 140px; object-fit: cover; border: 2px solid rgba(109, 109, 109, 0.452); border-radius: 50%;"></div>
                     <h4>Pacto Global</h4>
                     <p>Sustentabilidade</p>
                 </div>
                 <div class="cert-item">
-                    <div class="cert-icon">🤝</div>
+                    <div class="cert-icon"><img src="img/ethos-logo.jpg" alt="Instituto Ethos logo" style="width: 160px; object-fit: cover; border: 2px solid rgba(109, 109, 109, 0.452); border-radius: 50%;"></div>
                     <h4>Instituto Ethos</h4>
                     <p>Responsabilidade Social</p>
                 </div>
@@ -1949,7 +1961,7 @@
                
                 <div class="contact-info-section">
                     <div class="info-card">
-                        <div class="info-icon">📞</div>
+                        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
                         <div class="info-content">
                             <h3>Telefone</h3>
                             <p>0800 629 7372<br>(21) 3675-1900</p>
@@ -1957,7 +1969,7 @@
                     </div>
                    
                     <div class="info-card">
-                        <div class="info-icon">✉️</div>
+                        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
                         <div class="info-content">
                             <h3>E-mail</h3>
                             <p>contato@maxpesa.com.br</p>
@@ -1965,7 +1977,7 @@
                     </div>
                    
                     <div class="info-card">
-                        <div class="info-icon">📍</div>
+                        <div class="info-icon"><i class="fa-solid fa-map-pin"></i></div>
                         <div class="info-content">
                             <h3>Endereço</h3>
                             <p>Av. Primavera, 156<br>Jardim Primavera<br>Duque de Caxias - RJ<br>CEP: 25215-255</p>
@@ -1973,7 +1985,7 @@
                     </div>
                    
                     <div class="info-card">
-                        <div class="info-icon">🏢</div>
+                        <div class="info-icon"><i class="fa-solid fa-building"></i></div>
                         <div class="info-content">
                             <h3>Filiais</h3>
                             <p>Minas Gerais<br>São Paulo<br>Espírito Santo</p>
@@ -2030,20 +2042,20 @@
                 <h3>Contato</h3>
                 <div class="footer-contact-info">
                     <div class="footer-contact-item">
-                        <div class="footer-contact-icon">📞</div>
+                        <div class="footer-contact-icon"><i class="fa-solid fa-phone"></i></div>
                         <div class="footer-contact-text">
                             <a href="tel:08006297372">0800 629 7372</a><br>
                             <a href="tel:2136751900">(21) 3675-1900</a>
                         </div>
                     </div>
                     <div class="footer-contact-item">
-                        <div class="footer-contact-icon">✉️</div>
+                        <div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div>
                         <div class="footer-contact-text">
                             <a href="mailto:contato@maxpesa.com.br">contato@maxpesa.com.br</a>
                         </div>
                     </div>
                     <div class="footer-contact-item">
-                        <div class="footer-contact-icon">📍</div>
+                        <div class="footer-contact-icon"><i class="fa-solid fa-building"></i></div>
                         <div class="footer-contact-text">
                             Av. Primavera, 156<br>
                             Duque de Caxias - RJ
