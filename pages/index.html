@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupo Maxpesa - Movimentando Soluções</title>
     <style>
@@ -598,6 +599,60 @@
             margin-bottom: 25px;
         }
  
+                    /* Fundo escurecido */
+            #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Escurece o fundo */
+            z-index: 5;
+            transition: 0.5s;
+            }
+
+            /* O Card centralizado */
+            #modal {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%); /* Centralização exata */
+            width: 500px;
+            max-width: 90%;
+            background-color: #fff;
+            padding: 1.5rem;
+            z-index: 10;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: 0.5s;
+            }
+
+            /* Esconder elementos */
+            .hide {
+            opacity: 0;
+            pointer-events: none;
+            }
+
+            /* Estilização interna */
+            .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            }
+
+            #close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            }
+
+            #close-modal:hover { color: #000; }
+
         .service-link {
             color: #C41E3A;
             font-weight: 700;
@@ -1594,19 +1649,19 @@
                    
                     <div class="about-features">
                         <div class="feature-item">
-                            <div class="feature-icon">✓</div>
+                            <div class="feature-icon"><i class="fa-solid fa-industry"></i></div>
                             <div class="feature-text">Equipamentos Modernos</div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon">✓</div>
+                            <div class="feature-icon"><i class="fa-solid fa-people-group"></i></div>
                             <div class="feature-text">Equipe Qualificada</div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon">✓</div>
+                            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
                             <div class="feature-text">Segurança Garantida</div>
                         </div>
                         <div class="feature-item">
-                            <div class="feature-icon">✓</div>
+                            <div class="feature-icon"><i class="fa-solid fa-check"></i></div>
                             <div class="feature-text">Resultados Comprovados</div>
                         </div>
                     </div>
@@ -1650,7 +1705,22 @@
                     <div class="service-icon">🏗️</div>
                     <h3>Movimentação Horizontal e Vertical de Cargas</h3>
                     <p>Soluções completas e seguras para movimentação de cargas pesadas com equipamentos de última geração e equipe especializada.</p>
-                    <a href="#" class="service-link">Saiba mais →</a>
+                <div id="fade" class="hide"></div>
+                    <div id="modal" class="hide">
+                    <div class="modal-header">
+                        <h3 id="modal-title">Título do Serviço</h3>
+                        <button id="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-description">Descrição detalhada aqui...</p>
+                    </div>
+                    </div>
+
+                    <a href="javascript:void(0)" 
+                    class="service-link" 
+                    onclick="openModal('Movimentação de Cargas', 'Aqui vai o texto detalhado sobre como funciona a movimentação horizontal e vertical...')">
+                    Saiba mais →
+                    </a>
                 </div>
                
                 <div class="service-card">
@@ -2001,6 +2071,31 @@
     </a>
  
     <script>
+                        const modal = document.querySelector("#modal");
+        const fade = document.querySelector("#fade");
+        const closeModal = document.querySelector("#close-modal");
+
+        // Função única para abrir e trocar o texto
+        const openModal = (titulo, texto) => {
+        document.querySelector("#modal-title").innerText = titulo;
+        document.querySelector("#modal-description").innerText = texto;
+        
+        modal.classList.remove("hide");
+        fade.classList.remove("hide");
+        };
+
+        // Função para fechar
+        const toggleModal = () => {
+        modal.classList.add("hide");
+        fade.classList.add("hide");
+        };
+
+        // Fechar ao clicar no X ou no fundo escuro
+        [closeModal, fade].forEach((el) => {
+        el.addEventListener("click", () => toggleModal());
+        });
+
+
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
