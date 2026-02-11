@@ -161,22 +161,33 @@
             transition: 0.3s;
         }
  
-        /* Hero Section */
         .hero {
+            position: absolute;
             min-height: 100vh;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.95) 0%, rgba(139, 20, 40, 0.9) 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect fill="%23C41E3A" width="1920" height="1080"/><rect fill="url(%23grid)" width="1920" height="1080"/></svg>');
+            background: 
+                linear-gradient(135deg, rgba(230, 35, 0, 0.5) 0%, rgba(107, 3, 3, 0.452) 100%),
+                url('img/maxpesa-hero-img4.jfif'); 
+            background-blend-mode: overlay;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ffffff;
             text-align: center;
-            padding-top: 160px;
+            padding-top: 80px;
             position: relative;
             overflow: hidden;
+            animation: heroZoom 10s ease-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(196, 30, 58, 0.2) 0%, transparent 70%);
+            animation: pulseGlow 8s infinite alternate;
+            pointer-events: none;
         }
  
         .hero::before {
@@ -198,79 +209,79 @@
             position: relative;
         }
  
+        @keyframes heroZoom {
+            from { transform: scale(1.1); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 40px;
+            z-index: 2;
+            position: relative;
+        }
+
         .hero-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.226);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 10px 24px;
             border-radius: 30px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 30px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: pulse 2s ease infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
- 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
- 
+
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             margin-bottom: 25px;
             font-weight: 900;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            line-height: 1.1;
+            line-height: 1;
             letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
- 
+
         .hero p {
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
             margin-bottom: 40px;
-            opacity: 0.95;
-            font-weight: 400;
-            line-height: 1.8;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
- 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
- 
+
         .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
             padding: 18px 40px;
             background: #ffffff;
             color: #c41e1e;
-            text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1.05rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-decoration: none;
         }
- 
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            background: #f8f8f8;
-        }
- 
+
         .cta-button-outline {
-            background: transparent;
-            color: #ffffff;
+            background: #ffffff57;
+            color: #e4e4e4;
             border: 2px solid #ffffff;
+            text-decoration: none;
+            backdrop-filter: blur(6px);
         }
- 
-        .cta-button-outline:hover {
-            background: #ffffff;
-            color: #d12323;
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
  
         /* Floating Elements */
@@ -600,34 +611,155 @@
             margin-bottom: 25px;
         }
 
-       
-        .hide { opacity: 0; pointer-events: none; }
+#fade {
+    display: block !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    z-index: 99998 !important;
+}
 
-        /* Responsividade: No celular fica um abaixo do outro */
+/* A classe que esconde (garanta que ela seja assim) */
+.hide {
+    display: none ;
+}
+
+
+#modal {
+    display: block;
+    position: fixed;
+    top: 50% ;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    
+    width: 600px;
+    height: auto;
+    background-color: white !important;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    z-index: 99999 !important; 
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: left;
+}
+
+#close-modal {
+    background: #f8f9fa;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+#close-modal:hover {
+    background: #FFE5E9;
+    color: #C41E3A;
+}
+
+
+.modal-body {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    text-align: left;
+}
+
+section#servicos #modal {
+    width: 80%;
+    height: auto;
+}
+
+.hide {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+#modal.hide {
+    transform: translate(-50%, -40%);
+}
+
+.modal-text-content {
+    flex: 0 0 45%; 
+    max-width: 45%;
+}
+
+#modal-description {
+    font-size: 0.95rem; 
+    line-height: 1.6;
+    color: #555;
+    white-space: pre-line; 
+}
+
+.modal-video-content {
+    flex: 1;
+    width: 100%;
+}
+
+.modal-video-content video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+section#servicos #modal {
+    width: 900px !important; 
+    max-width: 95vw;
+}
+
         @media (max-width: 768px) {
             .modal-container { grid-template-columns: 1fr; }
             .modal-image { height: 300px; }
             #modal { width: 100vw; height: 100vh; border-radius: 0; }
+            .modal-body {
+                flex-direction: column;
+            }
+            .modal-text-content {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
         }
  
-                    /* Fundo escurecido */
             #fade {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Escurece o fundo */
+            background-color: rgba(0, 0, 0, 0.6); 
             z-index: 5;
             transition: 0.5s;
             }
 
-            /* O Card centralizado */
             #modal {
             position: fixed;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%); /* Centralização exata */
+            transform: translate(-50%, -50%); 
             width: 500px;
             max-width: 90%;
             background-color: #fff;
@@ -638,13 +770,11 @@
             transition: 0.5s;
             }
 
-            /* Esconder elementos */
             .hide {
             opacity: 0;
             pointer-events: none;
             }
 
-            /* Estilização interna */
             .modal-header {
             display: flex;
             justify-content: space-between;
@@ -678,7 +808,6 @@
             gap: 15px;
         }
  
-        /* Certifications */
         #certificacoes {
             background: #ffffff;
         }
@@ -739,8 +868,7 @@
             transform: translateY(-8px) scale(1.03);
             box-shadow: 0 20px 50px rgba(196, 30, 58, 0.12);
             border-color: #FFE5E9;
-        }
- 
+        } 
                 
         .cert-icon {
             position: relative;
@@ -1675,25 +1803,21 @@
     </header>
  
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
-       
-        <div class="hero-content">
-            <div class="hero-badge">Há mais de 25 anos no mercado!</div>
-            <h1>Movimentando Soluções</h1>
-            <p>Excelência em movimentação de cargas, transporte e equipamentos industriais. Tecnologia de ponta, equipe especializada e comprometimento com resultados.</p>
-            <div class="cta-buttons">
-                <a href="#servicos" class="cta-button">
-                    Nossos Serviços →
-                </a>
-                <a href="#contato" class="cta-button cta-button-outline">
-                    Solicite um Orçamento
-                </a>
-            </div>
+<section class="hero" id="home">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    
+    <div class="hero-content">
+        <div class="hero-badge">Há mais de 25 anos no mercado!</div>
+        <h1>Movimentando Soluções</h1>
+        <p>Excelência em movimentação de cargas, transporte e equipamentos industriais com tecnologia de ponta.</p>
+        <div class="cta-buttons">
+            <a href="#servicos" class="cta-button">Nossos Serviços →</a>
+            <a href="#contato" class="cta-button cta-button-outline">Solicite um Orçamento</a>
         </div>
-    </section>
+    </div>
+</section>
  
     <!-- About Section -->
     <section id="sobre">
@@ -1756,75 +1880,70 @@
     </section>
  
     <!-- Services Section -->
-    <section id="servicos">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">O Que Fazemos</div>
-                <h2 class="section-title">Nossos Serviços</h2>
-                <p class="section-subtitle">Soluções completas e personalizadas para todas as suas necessidades de movimentação e transporte industrial</p>
+   <section id="servicos">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">O Que Fazemos</div>
+            <h2 class="section-title">Nossos Serviços</h2>
+            <p class="section-subtitle">Soluções completas e personalizadas para todas as suas necessidades de movimentação e transporte industrial</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-road-barrier"></i></div>
+                <h3>Movimentação Horizontal e Vertical de Cargas</h3>
+                <p>Soluções completas e seguras para movimentação de cargas pesadas com equipamentos de última geração.</p>
+                <a href="javascript:void(0)" class="service-link" onclick="openModal('Movimentação Horizontal e Vertical de Cargas', 'O Grupo Maxpesa é especialista em movimentação vertical e horizontal de cargas, atuando com içamentos complexos através de planos de rigging desenvolvidos por sua equipe de projetos, utilizando equipamentos de última geração de variados portes, como guindastes, muncks, empilhadeiras, entre outros.\n  \nAlém das diversas soluções em içamento de cargas, a empresa também é especialista em transporte, oferecendo a logística, como também soluções em armazenagem, se necessário. \n\nO Grupo Maxpesa é reconhecido por oferecer soluções completas para seus clientes em todo o território nacional, sempre prezando pela qualidade, segurança e transparência.')">Saiba mais →</a>
             </div>
-           
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-road-barrier"></i></div>
-                    <h3>Movimentação Horizontal e Vertical de Cargas</h3>
-                    <p>Soluções completas e seguras para movimentação de cargas pesadas com equipamentos de última geração e equipe especializada.</p>
-                <div id="fade" class="hide"></div>
-                    <div id="modal" class="hide">
-                    <div class="modal-header">
-                        <h3 id="modal-title">Título do Serviço</h3>
-                        <button id="close-modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="modal-description">Descrição detalhada aqui...</p>
-                    </div>
-                    </div>
 
-                    <a href="javascript:void(0)" 
-                    class="service-link" 
-                    onclick="openModal('Movimentação de Cargas', 'Aqui vai o texto detalhado sobre como funciona a movimentação horizontal e vertical...')">
-                    Saiba mais →
-                    </a>
-                </div>
-               
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-truck"></i></div>
-                    <h3>Movimentação de Materiais</h3>
-                    <p>Linha amarela completa e caminhões especializados para transporte eficiente de materiais industriais.</p>
-                    <a href="#" class="service-link">Saiba mais →</a>
-                    <div id="fade" class="hide"></div>
-                </div>
-               
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-industry"></i></div>
-                    <h3>Remoção Industrial</h3>
-                    <p>Especialistas em desmontagem, transporte e montagem de equipamentos industriais com total segurança.</p>
-                    <a href="#" class="service-link">Saiba mais →</a>
-                </div>
-               
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-gear"></i></div>
-                    <h3>Locação de Equipamentos</h3>
-                    <p>Equipamentos modernos disponíveis para locação com operadores altamente qualificados.</p>
-                    <a href="#" class="service-link">Saiba mais →</a>
-                </div>
-               
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-cart-arrow-down"></i></div>
-                    <h3>Venda de Equipamentos</h3>
-                    <p>Venda de equipamentos industriais novos e seminovos com garantia e suporte técnico completo.</p>
-                    <a href="#" class="service-link">Saiba mais →</a>
-                </div>
-               
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-paste"></i></div>
-                    <h3>Orçamento Personalizado</h3>
-                    <p>Solicite um orçamento totalmente customizado para atender suas necessidades específicas.</p>
-                    <a href="#contato" class="service-link">Solicitar agora →</a>
-                </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-truck"></i></div>
+                <h3>Movimentação de Materiais</h3>  
+                <p>Linha amarela completa e caminhões especializados para transporte eficiente de materiais industriais.</p>
+                <a href="javascript:void(0)" class="service-link" onclick="openModal('Movimentação de Materiais', 'O Grupo Maxpesa atua também com serviços de movimentação de materiais, como solos, granéis, minério, entre outros, oferecendo soluções em movimentação interna, carregamento e transporte, limpeza industrial, supressão vegetal e outras. \n\nA empresa está sempre aberta e disposta à estudar a demanda de seu cliente e com sua forte capacidade de investimento, fazer a aquisição de equipamentos de última geração para atender suas demandas.')">Saiba mais →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-industry"></i></div>
+                <h3>Remoção Industrial</h3>
+                <p>Especialistas em desmontagem, transporte e montagem de equipamentos industriais com total segurança.</p>
+                <a href="javascript:void(0)" class="service-link" onclick="openModal('Remoção Industrial', 'O Grupo Maxpesa fornece também remoções técnicas com carga, descarga e arrasto de cargas mais simples às mais complexas, como por exemplo de transformadores, além de mudanças e montagens industriais, contando sempre com uma equipe técnica altamente qualificada, utilizando sempre os mais modernos equipamentos e acima de tudo, prezando pela segurança e qualidade. \n\n Nossa equipe é composta por profissionais com mais de 25 anos de experiência, capacitados a oferecer estudos de Engenharia e Planos de Rigging c/ ART sob a supervisão do nosso Engenheiro Mecânico, visando oferecer sempre a melhor solução e o melhor custo x benefício, com total segurança e qualidade.')">Saiba mais →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-gear"></i></div>
+                <h3>Locação de Equipamentos</h3>
+                <p>Equipamentos modernos disponíveis para locação com operadores altamente qualificados.</p>
+                <a href="javascript:void(0)" class="service-link" onclick="openModal('Locação de Equipamentos', 'Reunindo a experiência de seus mais de 25 anos de mercado, o investimento em equipamentos com alta tecnologia e o foco em apresentar sempre as melhores soluções, o Grupo Maxpesa fornece as mais variadas alternativas em locação de equipamentos para diversas aplicações, como movimentação vertical e horizontal de cargas, movimentação de materiais entre outros. \n\n A empresa possui uma frota de equipamentos moderna e diversificada, estando também aberta e disposta à estudar a demanda de seu cliente, e com sua forte capacidade de investimento, fazer a aquisição de equipamentos de última geração para atender suas demandas, tais como : \n\n- Guindastes Telescópicos e de esteira de diversos portes;\n\n- Caminhões Guindautos (Munck) de diversos portes; \n\n- Equipamentos de linha amarela (Escavadeiras, Tratores, Motoniveladoras, Pá Carregadeiras e outros); \n\n- Caminhões Basculantes 6x4 e 8x4; \n\n- Equipamentos de apoio (Caminhões Pipa, Comboio, Prancha e outros); \n\n- Equipamentos sujeitos à disponibilidade no momento da consulta.')">Saiba mais →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-cart-arrow-down"></i></div>
+                <h3>Venda de Equipamentos</h3>
+                <p>Venda de equipamentos industriais novos e seminovos com garantia e suporte técnico completo.</p>
+                <a href="javascript:void(0)" class="service-link" onclick="openModal('Venda de Equipamentos', 'O Grupo Maxpesa fornece também remoções técnicas com carga, descarga e arrasto de cargas mais simples às mais complexas, como por exemplo de transformadores, além de mudanças e montagens industriais, contando sempre com uma equipe técnica altamente qualificada, utilizando sempre os mais modernos equipamentos e acima de tudo, prezando pela segurança e qualidade. \n\nNossa equipe é composta por profissionais com mais de 25 anos de experiência, capacitados a oferecer estudos de Engenharia e Planos de Rigging c/ ART sob a supervisão do nosso Engenheiro Mecânico, visando oferecer sempre a melhor solução e o melhor custo x benefício, com total segurança e qualidade.')">Saiba mais →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-paste"></i></div>
+                <h3>Orçamento Personalizado</h3>
+                <p>Solicite um orçamento totalmente customizado para atender suas necessidades específicas.</p>
+                <a href="#contato" class="service-link">Solicitar agora →</a>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div id="fade" class="hide"></div>
+    <div id="modal" class="hide">
+        <div class="modal-header">
+            <h3 id="modal-title">Título</h3>
+            <button id="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p id="modal-description">Descrição...</p>
+        </div>
+    </div>
+</section>
  
     <!-- Certifications Section -->
     <section id="certificacoes">
@@ -2142,30 +2261,41 @@
     </a>
  
     <script>
-                        const modal = document.querySelector("#modal");
-        const fade = document.querySelector("#fade");
-        const closeModal = document.querySelector("#close-modal");
+                  // APENAS ADICIONE ESTE BLOCO ÚNICO
+const modal = document.querySelector("#modal");
+const fade = document.querySelector("#fade");
+const closeModal = document.querySelector("#close-modal");
 
-        // Função única para abrir e trocar o texto
-        const openModal = (titulo, texto) => {
-        document.querySelector("#modal-title").innerText = titulo;
-        document.querySelector("#modal-description").innerText = texto;
-        
-        modal.classList.remove("hide");
-        fade.classList.remove("hide");
-        };
+const openModal = (titulo, texto) => {
+    // Garante que o modal receba os dados do card clicado
+    document.querySelector("#modal-title").innerText = titulo;
+    document.querySelector("#modal-description").innerText = texto;
+    
+    // Remove a classe que esconde os elementos
+    modal.classList.remove("hide");
+    fade.classList.remove("hide");
+    
+    // Bloqueia o scroll da página ao fundo enquanto o modal está aberto
+    document.body.style.overflow = "hidden";
+};
 
-        // Função para fechar
-        const toggleModal = () => {
-        modal.classList.add("hide");
-        fade.classList.add("hide");
-        };
+const toggleModal = () => {
+    modal.classList.add("hide");
+    fade.classList.add("hide");
+    
+    // Libera o scroll novamente
+    document.body.style.overflow = "auto";
+};
 
-        // Fechar ao clicar no X ou no fundo escuro
-        [closeModal, fade].forEach((el) => {
-        el.addEventListener("click", () => toggleModal());
-        });
+// Listeners para fechar
+[closeModal, fade].forEach((el) => {
+    el.addEventListener("click", () => toggleModal());
+});
 
+// Fecha com a tecla Esc
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") toggleModal();
+});
 
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
